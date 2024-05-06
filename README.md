@@ -9,7 +9,7 @@ git clone https://github.com/karinjs/karin-adapter-QQBot-SDK.git ./plugins/karin
 ## 安装依赖
 
 ```bash
-pnpm install --filter=karin-adapter-QQBot-SDK
+pnpm install --filter=karin-adapter-qqbot-sdk
 ```
 
 ## 配置机器人
