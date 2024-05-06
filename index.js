@@ -6,6 +6,6 @@ export { dirPath }
 
 logger.info(basename + ' 插件 0.0.1初始化~')
 
-for (let bot of Config.QQBot.QQBot) {
+for (let bot of Config.QQBot) {
   new QQBot(bot).init()
 }

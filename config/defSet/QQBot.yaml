@@ -1,1 +1,23 @@
+# 示例
+default:
+  - appid:
+    secret:
+    sandbox: false
+    removeAt: true
+    logLevel: info
+    maxRetry: 10
+    type: 1 # 1=直接发 2=模板 3=原生 2需要配置custom_template_id 请填写纯数字
+    custom_template_id:
+    intents:
+      - GROUP_AT_MESSAGE_CREATE
+      # - C2C_MESSAGE_CREATE
+      # - GUILD_MESSAGES
+      # - PUBLIC_GUILD_MESSAGES
+      # - DIRECT_MESSAGE
+      # - GUILD_MESSAGE_REACTIONS
+      # - GUILDS
+      # - GUILD_MEMBERS
+      # - DIRECT_MESSAGE
+
+# 配置项
 QQBot:
