@@ -3,15 +3,13 @@
   "version": "0.0.1",
   "author": "Lain",
   "type": "module",
-  "scripts": {
-    "build": "cd ./model/proto && node build.js"
-  },
   "dependencies": {
     "qq-group-bot": "1.0.42",
     "qrcode": "1.5.3",
     "jimp": "0.22.12",
     "silk-wasm": "3.4.0",
-    "get-urls": "12.1.0"
+    "get-urls": "12.1.0",
+    "image-size": "1.1.1"
   },
   "imports": {
     "#Karin": "./lib/index.js"

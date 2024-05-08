@@ -35,3 +35,75 @@ QQBot:
       # - GUILD_MEMBERS
       # - DIRECT_MESSAGE
 ```
+
+## 配置图床
+
+> 暂时只适配图片，可配置多个，上一个失败自动下一个...
+
+```js
+import axios from 'axios'
+import { common, plugin } from '#Karin'
+
+/** key获取地址：https://api.imgbb.com/ 登录后获取即可 */
+const key = ''
+
+/** 上传后是否自动删除，单位秒 */
+const expiration = '600'
+
+export class UploadImage extends plugin {
+  constructor () {
+    super({
+      name: 'imgbb图床',
+      handler: [
+        {
+          key: 'QQBot.upload.Image',
+          fnc: 'image',
+          priority: 80
+        }
+      ]
+    })
+  }
+
+  async image (args, reject) {
+    const file = await common.base64(args.file)
+    const formData = new FormData()
+    formData.append('key', key)
+    formData.append('image', file)
+
+    if (expiration) formData.append('expiration', expiration)
+
+    // 重试2次
+    let res
+    for (let i = 0; i < 2; i++) {
+      res = await this.uploadImage(formData)
+      if (res) break
+    }
+    if (!res) {
+      reject('[imgbb图床] 上传失败')
+      return false
+    }
+    return res
+  }
+
+  // 上传图片
+  async uploadImage (data) {
+    const url = 'https://api.imgbb.com/1/upload'
+    const res = await axios({
+      method: 'post',
+      url,
+      data,
+      headers: {
+        'User-Agent': 'PostmanRuntime-ApipostRuntime/1.1.0',
+        'Cache-Control': 'no-cache'
+      }
+    })
+    if (res.status === 200) {
+      const { data } = res.data
+      data.url = data.url.replace(/^https:\/\//, 'https://i0.wp.com/')
+      return data
+    }
+    return false
+  }
+}
+
+```
